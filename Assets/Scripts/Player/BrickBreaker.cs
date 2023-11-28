@@ -1,7 +1,10 @@
+using GamePatron.IndividualGames.Player;
 using UnityEngine;
 
 public class BrickBreaker : MonoBehaviour
 {
+    [SerializeField] private PlayerController playerController;
+
     private readonly string _brickTag = "KirilacakObje";
 
     /*
@@ -13,6 +16,8 @@ public class BrickBreaker : MonoBehaviour
     {
         if (other.CompareTag(_brickTag))
         {
+            playerController.InterruptJump();
+            GameManagerScript.Instance.OnPointGained(GameManagerScript.Instance.Points.Brick);
             other.GetComponentInParent<KirilacakObje>().BrickBroken();
         }
     }

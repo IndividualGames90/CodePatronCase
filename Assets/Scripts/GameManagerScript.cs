@@ -1,8 +1,12 @@
+using GamePatron.IndividualGames.ScriptableObjects;
 using System;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
+    public Points Points => _points;
+    [SerializeField] private Points _points;
+
     public static GameManagerScript Instance
     {
         get
@@ -24,6 +28,7 @@ public class GameManagerScript : MonoBehaviour
 
     public Action GameWon;
     public Action GameLost;
+    public Action<int> PointGained;
 
     private void Awake()
     {
@@ -34,13 +39,18 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    public void Victory()
+    public void OnVictory()
     {
         GameWon?.Invoke();
     }
 
-    public void Lost()
+    public void OnLost()
     {
         GameLost?.Invoke();
+    }
+
+    public void OnPointGained(int point)
+    {
+        PointGained?.Invoke(point);
     }
 }

@@ -17,17 +17,13 @@ namespace GamePatron.IndividualGames.Player
         [Header("Player Data")]
         [SerializeField] private float _movementMultiplier = 50f;
         [SerializeField] private float _jumpForce = 5f;
-        [SerializeField] private float _jumpSpeedMax = 10f;
         [SerializeField] private float _moveSpeed = 5f;
         [SerializeField] private float _moveSpeedMax = 10f;
         [SerializeField] private float _gravityValue = -1f;
 
-        private bool _grounded;
-        private const float _bottomDistance = .2f;
-        private const float _slowDownFactor = .1f;
-
         private Vector2 _movement => InputController.Input.PlayerControls.Movement.ReadValue<Vector2>();
 
+        private bool _grounded;
         private bool _jumpInProgress;
         private bool _jumped;
         private bool _shooting;
@@ -35,14 +31,13 @@ namespace GamePatron.IndividualGames.Player
         private Vector3 _initialForward;
         private Vector3 _initialBackward;
         private Vector3 _playerVelocity;
-
         private Vector3 _bottomPosition;
         private Vector3 _cameraPlayerDistance;
 
-        private RaycastHit _hit;
         private Camera _mainCamera;
+        private readonly WaitForEndOfFrame _jumpWait = new();
 
-        private WaitForEndOfFrame _jumpWait = new();
+        private const float _bottomDistance = .2f;
 
         // Use this for initialization
         void Start()
@@ -66,6 +61,15 @@ namespace GamePatron.IndividualGames.Player
             YerCekimiVeZiplama();
             KameraTakip();
             KarakterHareket();
+            Shoot();
+        }
+
+        private void Shoot()
+        {
+            if (_shooting)
+            {
+
+            }
         }
 
         void AnimasyonVeRotasyon()
@@ -132,7 +136,7 @@ namespace GamePatron.IndividualGames.Player
         private void CheckGrounded()
         {
             _bottomPosition = transform.position;
-            _grounded = Physics.Raycast(_bottomPosition, Vector3.down, out _hit, _bottomDistance, 1 << Layers.Ground);
+            _grounded = Physics.Raycast(_bottomPosition, Vector3.down, _bottomDistance, 1 << Layers.Ground);
         }
 
         private IEnumerator Jump()
@@ -148,6 +152,12 @@ namespace GamePatron.IndividualGames.Player
                 yield return _jumpWait;
             }
 
+            _jumpInProgress = false;
+        }
+
+        public void InterruptJump()
+        {
+            StopAllCoroutines();
             _jumpInProgress = false;
         }
     }
