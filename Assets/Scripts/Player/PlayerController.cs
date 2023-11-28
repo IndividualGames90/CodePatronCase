@@ -15,7 +15,9 @@ namespace GamePatron.IndividualGames.Player
         [SerializeField] private Transform _playerMesh;
 
         [Header("Player Data")]
+        [SerializeField] private float _movementMultiplier = 50f;
         [SerializeField] private float _jumpForce = 5f;
+        [SerializeField] private float _jumpSpeedMax = 10f;
         [SerializeField] private float _moveSpeed = 5f;
         [SerializeField] private float _moveSpeedMax = 10f;
         [SerializeField] private float _gravityValue = -1f;
@@ -70,7 +72,7 @@ namespace GamePatron.IndividualGames.Player
         {
             if (_movement.x == 0)
             {
-                _playerVelocity = Vector3.Lerp(_playerVelocity, Vector3.zero, _slowDownFactor);
+                _playerVelocity.x = 0;
                 return;
             }
 
@@ -97,6 +99,11 @@ namespace GamePatron.IndividualGames.Player
 
             CheckGrounded();
 
+            if (_grounded)
+            {
+                _playerVelocity.y = 0;
+            }
+
             if (_grounded && _jumped)//Jump.
             {
                 StartCoroutine(Jump());
@@ -119,7 +126,7 @@ namespace GamePatron.IndividualGames.Player
         {
             _animator.SetFloat("Blend", Mathf.Abs(_playerVelocity.x) * 10);
 
-            characterController.Move(100 * Time.deltaTime * _playerVelocity);
+            characterController.Move(_movementMultiplier * Time.deltaTime * _playerVelocity);
         }
 
         private void CheckGrounded()
@@ -131,6 +138,7 @@ namespace GamePatron.IndividualGames.Player
         private IEnumerator Jump()
         {
             _jumpInProgress = true;
+
             float remainingJumpForce = _jumpForce;
             float jumpForceDiminish = .1f;
             while (remainingJumpForce > jumpForceDiminish)
@@ -139,6 +147,7 @@ namespace GamePatron.IndividualGames.Player
                 remainingJumpForce = Mathf.Lerp(remainingJumpForce, 0f, jumpForceDiminish);
                 yield return _jumpWait;
             }
+
             _jumpInProgress = false;
         }
     }

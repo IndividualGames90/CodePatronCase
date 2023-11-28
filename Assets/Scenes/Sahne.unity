@@ -18270,7 +18270,6 @@ GameObject:
   - component: {fileID: 4616337454406577051}
   - component: {fileID: 3358143486659954401}
   - component: {fileID: 390180092239535967}
-  - component: {fileID: 8524152650540439945}
   - component: {fileID: 8524152650540439946}
   m_Layer: 0
   m_Name: Player
@@ -18279,18 +18278,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8524152650540439945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8524152650540439944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3008cf815c5e5940907601486245fd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8524152650540439946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18308,7 +18295,9 @@ MonoBehaviour:
   mermiPrefab: {fileID: 4793587783203094722, guid: eb07ce2510f091c4db1a54c3a944b096, type: 3}
   _cameraLookAt: {fileID: 1391186693}
   _playerMesh: {fileID: 1283160719}
-  _jumpForce: 0.2
+  _movementMultiplier: 100
+  _jumpForce: 0.15
+  _jumpSpeedMax: 10
   _moveSpeed: 0.05
   _moveSpeedMax: 0.1
   _gravityValue: -2.5
