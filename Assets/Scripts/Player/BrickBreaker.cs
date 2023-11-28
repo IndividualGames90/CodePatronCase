@@ -18,7 +18,7 @@ public class BrickBreaker : MonoBehaviour
         {
             playerController.InterruptJump();
             GameManagerScript.Instance.OnPointGained(GameManagerScript.Instance.Points.Brick);
-            other.GetComponentInParent<KirilacakObje>().BrickBroken();
+            other.GetComponentInParent<KirilacakObje>().Broken();
         }
     }
 }
