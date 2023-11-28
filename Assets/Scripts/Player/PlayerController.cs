@@ -1,4 +1,6 @@
+using GamePatron.IndividualGames.Bullet;
 using GamePatron.IndividualGames.Unity;
+using IndividualGames.Pool;
 using System.Collections;
 using UnityEngine;
 
@@ -13,6 +15,9 @@ namespace GamePatron.IndividualGames.Player
         [SerializeField] private GameObject mermiPrefab; //Duvar ya da npc objelerine týklandýðýnda spawnlanacak olan mermi prefabý
         [SerializeField] private Transform _cameraLookAt;
         [SerializeField] private Transform _playerMesh;
+        [SerializeField] private Transform _shootTransform;
+        [SerializeField] private GameObjectPool _bulletPool;
+        [SerializeField] private MouseController _mouseController;
 
         [Header("Player Data")]
         [SerializeField] private float _movementMultiplier = 50f;
@@ -26,7 +31,7 @@ namespace GamePatron.IndividualGames.Player
         private bool _grounded;
         private bool _jumpInProgress;
         private bool _jumped;
-        private bool _shooting;
+        private bool _shootLocked;
 
         private Vector3 _initialForward;
         private Vector3 _initialBackward;
@@ -36,6 +41,7 @@ namespace GamePatron.IndividualGames.Player
 
         private Camera _mainCamera;
         private readonly WaitForEndOfFrame _jumpWait = new();
+        private readonly WaitForSeconds _shootWait = new(.5f);
 
         private const float _bottomDistance = .2f;
 
@@ -50,8 +56,14 @@ namespace GamePatron.IndividualGames.Player
             _initialBackward = -transform.forward;
 
             InputController.Input.PlayerControls.Jump.started += (C) => { _jumped = true; };
-            InputController.Input.PlayerControls.Shoot.started += (C) => { _shooting = true; };
-            InputController.Input.PlayerControls.Shoot.canceled += (C) => { _shooting = false; };
+
+            _mouseController.ShootBullet += Shoot;
+            GameManagerScript.Instance.GameWon += OnGameWin;
+        }
+
+        private void OnGameWin()
+        {
+            _animator.SetTrigger("Dance");
         }
 
         // Update is called once per frame
@@ -61,14 +73,17 @@ namespace GamePatron.IndividualGames.Player
             YerCekimiVeZiplama();
             KameraTakip();
             KarakterHareket();
-            Shoot();
         }
 
         private void Shoot()
         {
-            if (_shooting)
+            if (!_shootLocked)
             {
-
+                var go = _bulletPool.Retrieve();
+                go.transform.position = _shootTransform.position;
+                go.transform.rotation = _shootTransform.rotation;
+                go.GetComponent<BulletController>().Retrieved(_bulletPool);
+                StartCoroutine(ShootInterval());
             }
         }
 
@@ -158,7 +173,15 @@ namespace GamePatron.IndividualGames.Player
         public void InterruptJump()
         {
             StopAllCoroutines();
+            _shootLocked = false;
             _jumpInProgress = false;
+        }
+
+        private IEnumerator ShootInterval()
+        {
+            _shootLocked = true;
+            yield return _shootWait;
+            _shootLocked = false;
         }
     }
 }
