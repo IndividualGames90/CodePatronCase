@@ -6,7 +6,7 @@ public class GameWin : MonoBehaviour
     {
         if (other.CompareTag(Tags.Player))
         {
-            GameManagerScript.Instance.Victory();
+            GameManagerScript.Instance.OnVictory();
         }
     }
 }

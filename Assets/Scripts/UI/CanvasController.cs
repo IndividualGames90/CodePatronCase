@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,10 @@ namespace GamePatron.IndividualGames.UI
     public class CanvasController : MonoBehaviour
     {
         public static CanvasController Instance;
+        private int _currentScore;
+        private int _countdown = 60;
+
+        private WaitForSeconds _tickWait = new(1);
 
         private void Awake()
         {
@@ -19,6 +24,9 @@ namespace GamePatron.IndividualGames.UI
 
             GameManagerScript.Instance.GameWon += GameWin;
             GameManagerScript.Instance.GameLost += GameLost;
+            GameManagerScript.Instance.PointGained += OnScoreChanged;
+
+            StartCoroutine(Tick());
         }
 
         [SerializeField] private GameObject _gamewin;
@@ -37,6 +45,23 @@ namespace GamePatron.IndividualGames.UI
         {
             _gamelose.SetActive(true);
             _gamedata.SetActive(false);
+        }
+
+        private void OnScoreChanged(int addScore)
+        {
+            _currentScore += addScore;
+            _scoreLabel.text = _currentScore.ToString();
+        }
+
+        private IEnumerator Tick()
+        {
+            while (_countdown > 0)
+            {
+                _countdown--;
+                _countdownLabel.text = _countdown.ToString();
+                yield return _tickWait;
+            }
+            GameLost();
         }
     }
 }

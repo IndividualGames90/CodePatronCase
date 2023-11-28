@@ -850,11 +850,11 @@ RectTransform:
   m_Father: {fileID: 1371705449}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -451, y: 340}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 13, y: -5.700012}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &169759539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 60
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -909,7 +909,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -938,7 +938,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 47.114426, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2029,6 +2029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28dd8d101b0a0a94992561949af32f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _points: {fileID: 11400000, guid: 74f9f5302b70c5a44af480e7a8f00f46, type: 2}
 --- !u!1 &600195362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,6 +3852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284381f22e757674b8cff6ea4952381d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 8524152650540439946}
 --- !u!65 &999569621
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10425,11 +10427,11 @@ RectTransform:
   m_Father: {fileID: 1371705449}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -451, y: 340}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -1.1383, y: -7.9999695}
+  m_SizeDelta: {x: 84.2765, y: 50}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1394248341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10513,7 +10515,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.27924356, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -18297,7 +18299,6 @@ MonoBehaviour:
   _playerMesh: {fileID: 1283160719}
   _movementMultiplier: 100
   _jumpForce: 0.15
-  _jumpSpeedMax: 10
   _moveSpeed: 0.05
   _moveSpeedMax: 0.1
   _gravityValue: -2.5
