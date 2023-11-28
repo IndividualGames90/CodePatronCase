@@ -2343,7 +2343,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &701548902
@@ -5067,6 +5067,37 @@ SkinnedMeshRenderer:
     m_Center: {x: 9.313226e-10, y: 0.014263178, z: -0.0015374265}
     m_Extent: {x: 0.030787863, y: 0.0014776355, z: 0.0014066858}
   m_DirtyAABB: 0
+--- !u!1 &1208654287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1208654288}
+  m_Layer: 0
+  m_Name: Jump
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1208654288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208654287}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4616337454406577051}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254500500
 GameObject:
   m_ObjectHideFlags: 0
@@ -13637,29 +13668,6 @@ Transform:
   m_Father: {fileID: 5270735015495369024}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &390180092239535966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8524152650540439944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caa9f165e2b4f1a4f9522501717c095d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
-  characterController: {fileID: 390180092239535967}
-  _animator: {fileID: 3358143486659954401}
-  KameraObjesi: {fileID: 963194225}
-  mermiPrefab: {fileID: 4793587783203094722, guid: eb07ce2510f091c4db1a54c3a944b096, type: 3}
-  _cameraLookAt: {fileID: 1391186693}
-  _playerMesh: {fileID: 1283160719}
-  _jumpForce: 0.2
-  _moveSpeed: 0.05
-  _moveSpeedMax: 0.1
-  _gravityValue: -2.5
 --- !u!143 &390180092239535967
 CharacterController:
   m_ObjectHideFlags: 0
@@ -15949,6 +15957,7 @@ Transform:
   - {fileID: 1283160719}
   - {fileID: 1391186693}
   - {fileID: 999569619}
+  - {fileID: 1208654288}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -18261,7 +18270,8 @@ GameObject:
   - component: {fileID: 4616337454406577051}
   - component: {fileID: 3358143486659954401}
   - component: {fileID: 390180092239535967}
-  - component: {fileID: 390180092239535966}
+  - component: {fileID: 8524152650540439945}
+  - component: {fileID: 8524152650540439946}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -18269,6 +18279,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8524152650540439945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524152650540439944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3008cf815c5e5940907601486245fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8524152650540439946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524152650540439944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a8ec8dfcc1eaa4a9a4b48839c0f3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 390180092239535967}
+  _animator: {fileID: 3358143486659954401}
+  mermiPrefab: {fileID: 4793587783203094722, guid: eb07ce2510f091c4db1a54c3a944b096, type: 3}
+  _cameraLookAt: {fileID: 1391186693}
+  _playerMesh: {fileID: 1283160719}
+  _jumpForce: 0.2
+  _moveSpeed: 0.05
+  _moveSpeedMax: 0.1
+  _gravityValue: -2.5
 --- !u!1 &8535000156183195117
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,10 +16,6 @@ namespace GamePatron.IndividualGames.UI
             {
                 Instance = this;
             }
-            else
-            {
-                Destroy(gameObject);
-            }
 
             GameManagerScript.Instance.GameWon += GameWin;
             GameManagerScript.Instance.GameLost += GameLost;
