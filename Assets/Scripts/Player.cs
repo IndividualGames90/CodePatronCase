@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void KameraTakip()//Genelde cinemachinele yaparım, bu fonksiyon önceden olduğundan scriptle yaptım.
+    void KameraTakip()
     {
         _mainCamera.transform.position = Vector3.Lerp(transform.position, transform.position + _cameraPlayerDistance, 10f); ;
     }

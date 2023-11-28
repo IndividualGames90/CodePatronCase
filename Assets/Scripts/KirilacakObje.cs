@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KirilacakObje : MonoBehaviour
 {
-    void Start()
-    {
-    }
+    [SerializeField] GameObject _disableOnBroken;
+    [SerializeField] GameObject _enableOnBroken;
 
-    void Update()
+    public void BrickBroken()
     {
+        _disableOnBroken.SetActive(false);
+        _enableOnBroken.SetActive(true);
     }
 }

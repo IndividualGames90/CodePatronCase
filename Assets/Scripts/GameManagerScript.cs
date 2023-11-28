@@ -1,15 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
-    void Start()
+    public static GameManagerScript Instance
     {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameManagerScript>();
+                if (_instance == null)
+                {
+                    GameObject go = new GameObject("GameManager");
+                    _instance = go.AddComponent<GameManagerScript>();
+                    DontDestroyOnLoad(go);
+                }
+            }
+            return _instance;
+        }
+    }
+    private static GameManagerScript _instance;
+
+    public Action GameWon;
+    public Action GameLost;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
-    void Update()
+    public void Victory()
     {
+        GameWon?.Invoke();
+    }
+
+    public void Lost()
+    {
+        GameLost?.Invoke();
     }
 }
