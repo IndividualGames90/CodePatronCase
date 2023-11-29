@@ -41,7 +41,7 @@ namespace GamePatron.IndividualGames.Bullet
         {
             _ray.origin = transform.position;
             _ray.direction = transform.forward;
-
+            Debug.DrawRay(_ray.origin, _ray.direction.normalized * _destroyDistance, Color.red, .1f);
             if (Physics.Raycast(_ray, out _hit, _destroyDistance))
             {
                 if (_hit.collider.gameObject.CompareTag(Tags.Wall))

@@ -81,6 +81,7 @@ namespace GamePatron.IndividualGames.Player
         {
             if (!_shootLocked)
             {
+                _animator.SetTrigger("Punch");
                 var go = _bulletPool.Retrieve();
                 go.transform.position = _shootTransform.position;
                 go.transform.rotation = _shootTransform.rotation;
@@ -165,6 +166,7 @@ namespace GamePatron.IndividualGames.Player
         private IEnumerator Jump()
         {
             _jumpInProgress = true;
+            _animator.SetTrigger("Jump");
 
             float remainingJumpForce = _jumpForce;
             float jumpForceDiminish = .1f;
@@ -175,6 +177,7 @@ namespace GamePatron.IndividualGames.Player
                 yield return _jumpWait;
             }
 
+            _animator.SetTrigger("Land");
             _jumpInProgress = false;
         }
 

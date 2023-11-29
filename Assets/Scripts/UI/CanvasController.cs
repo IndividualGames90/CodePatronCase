@@ -69,5 +69,10 @@ namespace GamePatron.IndividualGames.UI
             }
             GameLost();
         }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }
