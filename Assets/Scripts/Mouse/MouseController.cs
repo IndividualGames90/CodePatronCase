@@ -1,34 +1,39 @@
 using System;
 using UnityEngine;
-
-public class MouseController : MonoBehaviour
+namespace GamePatron.IndividualGames.Mouse
 {
-    public Action ShootBullet;
-
-    private Camera _mainCamera;
-    private Ray _ray;
-    private RaycastHit _hit;
-
-    private void Awake()
+    /// <summary>
+    /// Mouse controller to register clicks.
+    /// </summary>
+    public class MouseController : MonoBehaviour
     {
-        _mainCamera = Camera.main;
-    }
+        public Action ShootBullet;
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        private Camera _mainCamera;
+        private Ray _ray;
+        private RaycastHit _hit;
+
+        private void Awake()
         {
-            _ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            _mainCamera = Camera.main;
+        }
 
-            if (Physics.Raycast(_ray, out _hit))
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                if (_hit.collider.gameObject.CompareTag(Tags.Wall))
+                _ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(_ray, out _hit))
                 {
-                    ShootBullet?.Invoke();
-                }
-                else if (_hit.collider.gameObject.CompareTag(Tags.NPC))
-                {
-                    ShootBullet?.Invoke();
+                    if (_hit.collider.gameObject.CompareTag(Tags.Wall))
+                    {
+                        ShootBullet?.Invoke();
+                    }
+                    else if (_hit.collider.gameObject.CompareTag(Tags.NPC))
+                    {
+                        ShootBullet?.Invoke();
+                    }
                 }
             }
         }

@@ -52,6 +52,7 @@ public class NPC : MonoBehaviour
         }
     }
 
+    /// <summary> Take damage. </summary>
     public void DamageNPC()
     {
         _health -= _damage;
@@ -63,6 +64,7 @@ public class NPC : MonoBehaviour
         }
     }
 
+    /// <summary> NPC is killed. </summary>
     private void Killed()
     {
         GameManagerScript.Instance.OnPointGained(GameManagerScript.Instance.Points.Enemy);

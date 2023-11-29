@@ -6,6 +6,8 @@ namespace GamePatron.IndividualGames.UI
 {
     /// <summary>
     /// Controls canvas elements.
+    /// Contains Actions for game events regarding the UI.
+    /// Handles the countdown.
     /// </summary>
     public class CanvasController : MonoBehaviour
     {
@@ -35,24 +37,28 @@ namespace GamePatron.IndividualGames.UI
         [SerializeField] private TextMeshProUGUI _scoreLabel;
         [SerializeField] private TextMeshProUGUI _countdownLabel;
 
+        /// <summary> Game is won. </summary>
         private void GameWin()
         {
             _gamewin.SetActive(true);
             _gamedata.SetActive(false);
         }
 
+        /// <summary> Game is lost. </summary>
         private void GameLost()
         {
             _gamelose.SetActive(true);
             _gamedata.SetActive(false);
         }
 
+        /// <summary> Score is changed in UI. </summary>
         private void OnScoreChanged(int addScore)
         {
             _currentScore += addScore;
             _scoreLabel.text = _currentScore.ToString();
         }
 
+        /// <summary> Tick each second for countdown. </summary>
         private IEnumerator Tick()
         {
             while (_countdown > 0)
@@ -62,6 +68,12 @@ namespace GamePatron.IndividualGames.UI
                 yield return _tickWait;
             }
             GameLost();
+        }
+
+        /// <summary> Quit game on quit button clicked. </summary>
+        public void QuitGame()
+        {
+            Application.Quit();
         }
     }
 }

@@ -2,6 +2,9 @@ using GamePatron.IndividualGames.ScriptableObjects;
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Controls game state.
+/// </summary>
 public class GameManagerScript : MonoBehaviour
 {
     public Points Points => _points;
@@ -39,16 +42,19 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    /// <summary> Game is won. </summary>
     public void OnVictory()
     {
         GameWon?.Invoke();
     }
 
+    /// <summary> Game is lost. </summary>
     public void OnLost()
     {
         GameLost?.Invoke();
     }
 
+    /// <summary> Player gained points. </summary>
     public void OnPointGained(int point)
     {
         PointGained?.Invoke(point);
