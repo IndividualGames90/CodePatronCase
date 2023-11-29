@@ -1,4 +1,5 @@
 using GamePatron.IndividualGames.Bullet;
+using GamePatron.IndividualGames.Mouse;
 using GamePatron.IndividualGames.Unity;
 using IndividualGames.Pool;
 using System.Collections;
@@ -75,6 +76,7 @@ namespace GamePatron.IndividualGames.Player
             KarakterHareket();
         }
 
+        /// <summary> Shoot a bullet. </summary>
         private void Shoot()
         {
             if (!_shootLocked)
@@ -87,6 +89,7 @@ namespace GamePatron.IndividualGames.Player
             }
         }
 
+        /// <summary> Rotates to move direction. </summary>
         void AnimasyonVeRotasyon()
         {
             if (_movement.x == 0)
@@ -109,6 +112,7 @@ namespace GamePatron.IndividualGames.Player
             _playerVelocity.x = Mathf.Clamp(_playerVelocity.x, -_moveSpeedMax, _moveSpeedMax);
         }
 
+        /// <summary> Jump and fall down physics. </summary>
         void YerCekimiVeZiplama()
         {
             if (_jumpInProgress)
@@ -136,11 +140,13 @@ namespace GamePatron.IndividualGames.Player
             }
         }
 
+        /// <summary> Camera follow for player. </summary>
         void KameraTakip()
         {
             _mainCamera.transform.position = Vector3.Lerp(transform.position, transform.position + _cameraPlayerDistance, 10f); ;
         }
 
+        /// <summary> Final character movement after other changes combined. </summary>
         void KarakterHareket()
         {
             _animator.SetFloat("Blend", Mathf.Abs(_playerVelocity.x) * 10);
@@ -148,12 +154,14 @@ namespace GamePatron.IndividualGames.Player
             characterController.Move(_movementMultiplier * Time.deltaTime * _playerVelocity);
         }
 
+        /// <summary> Check if player is grounded. </summary>
         private void CheckGrounded()
         {
             _bottomPosition = transform.position;
             _grounded = Physics.Raycast(_bottomPosition, Vector3.down, _bottomDistance, 1 << Layers.Ground);
         }
 
+        /// <summary> Jump in progress. </summary>
         private IEnumerator Jump()
         {
             _jumpInProgress = true;
@@ -170,6 +178,7 @@ namespace GamePatron.IndividualGames.Player
             _jumpInProgress = false;
         }
 
+        /// <summary> Interrupt jumping event. </summary>
         public void InterruptJump()
         {
             StopAllCoroutines();
@@ -177,6 +186,7 @@ namespace GamePatron.IndividualGames.Player
             _jumpInProgress = false;
         }
 
+        /// <summary> Wait between shots. </summary>
         private IEnumerator ShootInterval()
         {
             _shootLocked = true;
