@@ -37,6 +37,7 @@ namespace GamePatron.IndividualGames.Bullet
             pool.ReturnToPool(gameObject);
         }
 
+        /// <summary> Check distance with raycast and destroy walls and enemies. </summary>
         private void CheckDistance()
         {
             _ray.origin = transform.position;
@@ -58,6 +59,7 @@ namespace GamePatron.IndividualGames.Bullet
             }
         }
 
+        /// <summary> Move forward in each call. </summary>
         private void Move()
         {
             if (!_moving)

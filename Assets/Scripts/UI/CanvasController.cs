@@ -70,6 +70,7 @@ namespace GamePatron.IndividualGames.UI
             GameLost();
         }
 
+        /// <summary> Quit game on quit button clicked. </summary>
         public void QuitGame()
         {
             Application.Quit();
